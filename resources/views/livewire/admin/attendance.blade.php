@@ -1,23 +1,26 @@
+
+<div class="relative overflow-hidden bg-white/10 backdrop-blur-2xl border border-white/10 rounded-[32px] shadow-[0_20px_80px_rgba(0,0,0,0.45)] p-8">
 @extends('layouts.app')
 
 @section('content')
 
-<div class="bg-white rounded-3xl shadow-xl p-8">
+    <!-- Glow -->
+    <div class="absolute inset-0 bg-gradient-to-br from-fuchsia-500/10 via-transparent to-cyan-400/10 pointer-events-none"></div>
 
     <!-- Header -->
-    <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-5 mb-8">
+    <div class="relative z-10 flex flex-col lg:flex-row lg:items-center lg:justify-between gap-6 mb-8">
 
         <div>
-            <h1 class="text-4xl font-bold text-gray-800">
+            <h1 class="text-4xl font-extrabold text-white tracking-tight">
                 Attendance Management
             </h1>
 
-            <p class="text-gray-500 mt-2 text-sm">
+            <p class="text-gray-400 mt-2 text-sm tracking-wide">
                 Employee attendance data list
             </p>
         </div>
 
-        <div class="flex items-center gap-4">
+        <div class="flex flex-col sm:flex-row items-stretch sm:items-center gap-4">
 
             <!-- Search -->
             <div class="relative">
@@ -26,7 +29,7 @@
                     type="text"
                     id="searchInput"
                     placeholder="Search employee..."
-                    class="pl-12 pr-4 py-3 border border-gray-300 rounded-2xl outline-none focus:ring-2 focus:ring-blue-400 w-72"
+                    class="pl-12 pr-4 py-3 bg-white/10 border border-white/10 text-white placeholder-gray-400 rounded-2xl outline-none focus:ring-2 focus:ring-cyan-400 w-full sm:w-72 shadow-lg transition-all duration-300"
                 >
 
                 <span class="absolute left-4 top-3.5 text-gray-400">
@@ -36,10 +39,12 @@
             </div>
 
             <!-- Total -->
-            <div class="bg-gradient-to-r from-blue-500 to-indigo-500 text-white px-5 py-3 rounded-2xl shadow-md">
-                <h1 class="font-bold text-lg">
+            <div class="bg-gradient-to-r from-fuchsia-500 via-violet-500 to-cyan-400 text-white px-6 py-3 rounded-2xl shadow-[0_10px_30px_rgba(139,92,246,0.45)]">
+
+                <h1 class="font-bold text-lg tracking-wide">
                     Total : {{ count($attendances) }}
                 </h1>
+
             </div>
 
         </div>
@@ -47,12 +52,11 @@
     </div>
 
     <!-- Table -->
-    <div class="overflow-x-auto rounded-3xl border border-gray-200">
+    <div class="relative z-10 overflow-x-auto rounded-[28px] border border-white/10 bg-white/5 backdrop-blur-xl">
 
         <table class="w-full text-sm text-left" id="attendanceTable">
 
-            <!-- Head -->
-            <thead class="bg-gray-100 text-gray-700 uppercase text-xs">
+            <thead class="bg-white/10 text-gray-300 uppercase text-xs tracking-widest">
 
                 <tr>
                     <th class="px-6 py-5">No</th>
@@ -63,32 +67,27 @@
 
             </thead>
 
-            <!-- Body -->
-            <tbody class="divide-y divide-gray-200 bg-white">
+            <tbody class="divide-y divide-white/10 text-white">
 
                 @forelse ($attendances as $attendance)
 
-                    <tr class="hover:bg-blue-50 transition duration-200 table-row">
+                    <tr class="hover:bg-white/5 transition duration-300 table-row">
 
-                        <!-- Number -->
-                        <td class="px-6 py-5 font-semibold text-gray-700">
+                        <td class="px-6 py-5 font-semibold text-gray-300">
                             {{ $loop->iteration }}
                         </td>
 
-                        <!-- User -->
                         <td class="px-6 py-5 user-name">
 
                             <div class="flex items-center gap-4">
 
-                                <!-- Profile -->
                                 <img 
                                     src="https://i.pravatar.cc/150?img={{ $loop->iteration + 10 }}"
-                                    class="w-12 h-12 rounded-full object-cover border-2 border-blue-200 shadow-md"
+                                    class="w-12 h-12 rounded-full object-cover border-2 border-cyan-400 shadow-[0_0_20px_rgba(34,211,238,0.4)]"
                                 >
 
-                                <!-- Name -->
                                 <div>
-                                    <h1 class="font-semibold text-gray-800 text-base">
+                                    <h1 class="font-semibold text-white text-base">
                                         {{ $attendance->user->name }}
                                     </h1>
 
@@ -101,30 +100,29 @@
 
                         </td>
 
-                        <!-- Status -->
                         <td class="px-6 py-5">
 
                             @if($attendance->status == 'present')
 
-                                <span class="bg-green-100 text-green-700 px-4 py-2 rounded-full text-xs font-bold">
+                                <span class="bg-green-500/15 border border-green-400/20 text-green-300 px-4 py-2 rounded-full text-xs font-bold tracking-wide shadow-lg">
                                     ✅ Present
                                 </span>
 
                             @elseif($attendance->status == 'sick')
 
-                                <span class="bg-yellow-100 text-yellow-700 px-4 py-2 rounded-full text-xs font-bold">
+                                <span class="bg-yellow-500/15 border border-yellow-400/20 text-yellow-300 px-4 py-2 rounded-full text-xs font-bold tracking-wide shadow-lg">
                                     🤒 Sick
                                 </span>
 
                             @elseif($attendance->status == 'permit')
 
-                                <span class="bg-blue-100 text-blue-700 px-4 py-2 rounded-full text-xs font-bold">
+                                <span class="bg-cyan-500/15 border border-cyan-400/20 text-cyan-300 px-4 py-2 rounded-full text-xs font-bold tracking-wide shadow-lg">
                                     📄 Permit
                                 </span>
 
                             @else
 
-                                <span class="bg-red-100 text-red-700 px-4 py-2 rounded-full text-xs font-bold">
+                                <span class="bg-red-500/15 border border-red-400/20 text-red-300 px-4 py-2 rounded-full text-xs font-bold tracking-wide shadow-lg">
                                     ❌ Absent
                                 </span>
 
@@ -132,8 +130,7 @@
 
                         </td>
 
-                        <!-- Date -->
-                        <td class="px-6 py-5 text-gray-600 font-medium">
+                        <td class="px-6 py-5 text-gray-300 font-medium">
                             {{ $attendance->created_at->format('d M Y') }}
                         </td>
 
@@ -143,19 +140,19 @@
 
                     <tr>
 
-                        <td colspan="4" class="text-center py-16">
+                        <td colspan="4" class="text-center py-20">
 
                             <div class="flex flex-col items-center justify-center">
 
-                                <div class="text-6xl mb-4">
+                                <div class="text-7xl mb-5">
                                     📅
                                 </div>
 
-                                <h1 class="text-2xl font-bold text-gray-700">
+                                <h1 class="text-3xl font-bold text-white">
                                     No Attendance Data
                                 </h1>
 
-                                <p class="text-gray-400 mt-2">
+                                <p class="text-gray-400 mt-3">
                                     Attendance data will appear here
                                 </p>
 
@@ -172,9 +169,6 @@
         </table>
 
     </div>
-
-</div>
-
 <!-- Search Script -->
 <script>
 
@@ -200,5 +194,8 @@
     });
 
 </script>
+
+</div>
+
 
 @endsection

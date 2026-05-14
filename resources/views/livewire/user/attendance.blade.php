@@ -12,31 +12,34 @@
     <link rel="stylesheet"
     href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
 
-    <div class="min-h-screen bg-gradient-to-br from-slate-900 via-blue-900 to-slate-800">
+    <div class="min-h-screen bg-[#060816] relative overflow-hidden">
+
+        <!-- Background Glow -->
+        <div class="absolute inset-0 bg-[radial-gradient(circle_at_top_left,#7c3aed22,transparent_30%),radial-gradient(circle_at_bottom_right,#06b6d422,transparent_30%)]"></div>
 
         <!-- Navbar -->
-        <nav class="bg-white/10 backdrop-blur-lg border-b border-white/20 shadow-lg">
+        <nav class="relative z-10 bg-white/10 backdrop-blur-2xl border-b border-white/10 shadow-2xl">
 
-            <div class="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
+            <div class="max-w-7xl mx-auto px-6 py-5 flex items-center justify-between">
 
                 <div>
 
-                    <h1 class="text-2xl font-bold text-white tracking-wide">
+                    <h1 class="text-3xl font-extrabold text-white tracking-tight">
                         Payroll Attendance
                     </h1>
 
-                    <p class="text-gray-300 text-sm">
-                        Sistem Absensi Modern
+                    <p class="text-gray-400 text-sm mt-1 tracking-wide">
+                        Modern Attendance Dashboard
                     </p>
 
                 </div>
 
-                <div class="flex items-center gap-4">
+                <div class="flex items-center gap-5">
 
                     <div class="text-right">
 
-                        <p class="text-sm text-gray-300">
-                            Halo 👋
+                        <p class="text-sm text-gray-400">
+                            Welcome Back 👋
                         </p>
 
                         <h2 class="text-white font-bold text-lg">
@@ -48,13 +51,13 @@
                     <!-- Profile -->
                     <img
                         src="https://i.pravatar.cc/150?img=12"
-                        class="w-12 h-12 rounded-full border-2 border-blue-300 shadow-lg"
+                        class="w-14 h-14 rounded-2xl border border-white/20 shadow-[0_10px_30px_rgba(6,182,212,0.35)]"
                     >
 
                     <!-- Logout -->
                     <a
                         href="{{ route('logout') }}"
-                        class="bg-red-500 hover:bg-red-600 transition duration-300 text-white px-5 py-2 rounded-xl shadow-lg font-semibold"
+                        class="bg-red-500/15 border border-red-400/20 hover:bg-red-500 text-red-300 hover:text-white px-5 py-3 rounded-2xl shadow-lg font-semibold transition-all duration-300"
                     >
                         Logout
                     </a>
@@ -66,18 +69,22 @@
         </nav>
 
         <!-- Content -->
-        <div class="max-w-7xl mx-auto p-6">
+        <div class="relative z-10 max-w-7xl mx-auto p-6">
 
             <!-- Form Card -->
-            <div class="bg-white rounded-3xl shadow-2xl p-8 mb-8">
+            <div class="bg-white/10 backdrop-blur-2xl border border-white/10 rounded-[32px] shadow-[0_20px_80px_rgba(0,0,0,0.45)] p-8 mb-8">
 
-                <div class="mb-6">
+                <div class="mb-8">
 
-                    <h2 class="text-3xl font-bold text-gray-800">
-                        Form Absensi
+                    <div class="w-20 h-20 rounded-[28px] bg-gradient-to-br from-fuchsia-500 via-violet-500 to-cyan-400 flex items-center justify-center text-3xl shadow-[0_10px_40px_rgba(168,85,247,0.55)] border border-white/20 mb-5">
+                        📅
+                    </div>
+
+                    <h2 class="text-4xl font-extrabold text-white tracking-tight">
+                        Attendance Form
                     </h2>
 
-                    <p class="text-gray-500 mt-2">
+                    <p class="text-gray-400 mt-3">
                         Silahkan pilih status kehadiran hari ini.
                     </p>
 
@@ -87,26 +94,26 @@
 
                     <select
                         wire:model="status"
-                        class="w-full border-2 border-gray-200 rounded-2xl px-5 py-4 text-gray-700 focus:outline-none focus:ring-4 focus:ring-blue-300 font-medium"
+                        class="w-full bg-white/10 border border-white/10 rounded-2xl px-5 py-4 text-white shadow-lg focus:outline-none focus:ring-2 focus:ring-cyan-400 transition-all duration-300"
                     >
 
-                        <option value="">
+                        <option value="" class="bg-[#111827]">
                             --- Pilih Status ---
                         </option>
 
-                        <option value="present">
+                        <option value="present" class="bg-[#111827]">
                             ✅ Hadir
                         </option>
 
-                        <option value="absent">
+                        <option value="absent" class="bg-[#111827]">
                             ❌ Tidak Hadir
                         </option>
 
-                        <option value="permit">
+                        <option value="permit" class="bg-[#111827]">
                             📄 Izin
                         </option>
 
-                        <option value="sick">
+                        <option value="sick" class="bg-[#111827]">
                             🤒 Sakit
                         </option>
 
@@ -114,9 +121,9 @@
 
                     <button
                         wire:click="save"
-                        class="bg-blue-600 hover:bg-blue-700 transition duration-300 text-white font-bold px-8 py-4 rounded-2xl shadow-xl"
+                        class="bg-gradient-to-r from-cyan-400 via-violet-500 to-fuchsia-500 text-white font-bold px-8 py-4 rounded-2xl shadow-[0_10px_30px_rgba(139,92,246,0.45)] hover:scale-[1.02] hover:shadow-[0_15px_40px_rgba(6,182,212,0.45)] transition-all duration-300"
                     >
-                        Simpan
+                        🚀 Simpan
                     </button>
 
                 </div>
@@ -124,15 +131,15 @@
             </div>
 
             <!-- Table -->
-            <div class="bg-white rounded-3xl shadow-2xl overflow-hidden">
+            <div class="bg-white/10 backdrop-blur-2xl border border-white/10 rounded-[32px] shadow-[0_20px_80px_rgba(0,0,0,0.45)] overflow-hidden">
 
-                <div class="p-6 border-b bg-gray-50">
+                <div class="p-8 border-b border-white/10 bg-white/5">
 
-                    <h2 class="text-2xl font-bold text-gray-800">
-                        Data Absensi
+                    <h2 class="text-3xl font-bold text-white">
+                        Attendance Data
                     </h2>
 
-                    <p class="text-gray-500 mt-1">
+                    <p class="text-gray-400 mt-2">
                         Daftar kehadiran seluruh user
                     </p>
 
@@ -143,7 +150,7 @@
                     <table class="w-full text-sm text-left">
 
                         <!-- Head -->
-                        <thead class="bg-slate-900 text-white uppercase text-xs">
+                        <thead class="bg-white/10 text-gray-300 uppercase tracking-widest text-xs">
 
                             <tr>
 
@@ -158,30 +165,30 @@
                         </thead>
 
                         <!-- Body -->
-                        <tbody>
+                        <tbody class="divide-y divide-white/10">
 
                             @forelse($attendances as $item)
 
-                                <tr class="border-b hover:bg-blue-50 transition duration-200">
+                                <tr class="hover:bg-white/5 transition duration-300">
 
                                     <!-- No -->
-                                    <td class="p-5">
+                                    <td class="p-5 text-gray-300">
                                         {{ $loop->iteration }}
                                     </td>
 
                                     <!-- User -->
                                     <td class="p-5">
 
-                                        <div class="flex items-center gap-3">
+                                        <div class="flex items-center gap-4">
 
                                             <img
                                                 src="https://i.pravatar.cc/150?img={{ $loop->iteration + 10 }}"
-                                                class="w-11 h-11 rounded-full border-2 border-blue-200"
+                                                class="w-12 h-12 rounded-2xl border border-cyan-400/20 shadow-lg"
                                             >
 
                                             <div>
 
-                                                <h1 class="font-semibold text-gray-700">
+                                                <h1 class="font-semibold text-white text-base">
                                                     {{ $item->user->name ?? 'User' }}
                                                 </h1>
 
@@ -196,7 +203,7 @@
                                     </td>
 
                                     <!-- Date -->
-                                    <td class="p-5 text-gray-600">
+                                    <td class="p-5 text-gray-300 font-medium">
                                         {{ $item->date }}
                                     </td>
 
@@ -205,25 +212,25 @@
 
                                         @if($item->status == 'present')
 
-                                            <span class="bg-green-100 text-green-700 px-4 py-2 rounded-full text-xs font-bold">
+                                            <span class="bg-green-500/15 border border-green-400/20 text-green-300 px-4 py-2 rounded-full text-xs font-bold shadow-lg">
                                                 ✅ Hadir
                                             </span>
 
                                         @elseif($item->status == 'absent')
 
-                                            <span class="bg-red-100 text-red-700 px-4 py-2 rounded-full text-xs font-bold">
+                                            <span class="bg-red-500/15 border border-red-400/20 text-red-300 px-4 py-2 rounded-full text-xs font-bold shadow-lg">
                                                 ❌ Tidak Hadir
                                             </span>
 
                                         @elseif($item->status == 'permit')
 
-                                            <span class="bg-yellow-100 text-yellow-700 px-4 py-2 rounded-full text-xs font-bold">
+                                            <span class="bg-yellow-500/15 border border-yellow-400/20 text-yellow-300 px-4 py-2 rounded-full text-xs font-bold shadow-lg">
                                                 📄 Izin
                                             </span>
 
                                         @else
 
-                                            <span class="bg-blue-100 text-blue-700 px-4 py-2 rounded-full text-xs font-bold">
+                                            <span class="bg-cyan-500/15 border border-cyan-400/20 text-cyan-300 px-4 py-2 rounded-full text-xs font-bold shadow-lg">
                                                 🤒 Sakit
                                             </span>
 
@@ -237,7 +244,7 @@
                                         <button
                                             wire:click="delete({{ $item->id }})"
                                             onclick="confirm('Yakin mau hapus data ini?') || event.stopImmediatePropagation()"
-                                            class="bg-red-500 hover:bg-red-600 text-white px-4 py-2 rounded-xl shadow-md transition duration-300"
+                                            class="bg-red-500/15 border border-red-400/20 hover:bg-red-500 text-red-300 hover:text-white px-5 py-2 rounded-2xl shadow-lg transition-all duration-300"
                                         >
                                             Hapus
                                         </button>
@@ -251,7 +258,7 @@
                                 <tr>
 
                                     <td colspan="5"
-                                        class="text-center p-10 text-gray-500">
+                                        class="text-center p-14 text-gray-400">
 
                                         Belum ada data absensi.
 
@@ -286,9 +293,11 @@
                 text: 'Selamat datang kembali di sistem absensi',
                 icon: 'success',
 
-                background: '#ffffff',
+                background: '#111827',
 
-                confirmButtonColor: '#2563eb',
+                color: '#ffffff',
+
+                confirmButtonColor: '#8b5cf6',
 
                 timer: 3000,
 
@@ -330,6 +339,10 @@
                     title: data[0].title ?? 'Berhasil!',
 
                     text: data[0].text ?? '',
+
+                    background: '#111827',
+
+                    color: '#ffffff',
 
                     showConfirmButton: false,
 

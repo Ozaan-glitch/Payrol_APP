@@ -1,145 +1,248 @@
-<div>
-    <h1>Selamat datang di payroll</h1>
-    <div class="min-h-screen bg-gray-100 py-10">
-        <h1 class="text-3xl font-bold text-center mb-6">Halaman Payroll</h1>
+<div class="min-h-screen bg-[#060816] relative overflow-hidden py-10 px-4">
 
-        <!-- FORM -->
-        <h2 class="text-xl font-semibold text-gray-700 text-center">
-            Form Data
-        </h2>
+    <!-- Background Glow -->
+    <div class="absolute inset-0 bg-[radial-gradient(circle_at_top_left,#7c3aed22,transparent_30%),radial-gradient(circle_at_bottom_right,#06b6d422,transparent_30%)]"></div>
+
+    <div class="relative z-10 max-w-7xl mx-auto">
+
+        <!-- Header -->
+        <div class="text-center mb-10">
+
+            <div class="w-24 h-24 mx-auto rounded-[28px] bg-gradient-to-br from-fuchsia-500 via-violet-500 to-cyan-400 flex items-center justify-center text-4xl shadow-[0_10px_40px_rgba(168,85,247,0.55)] border border-white/20 mb-5">
+                💰
+            </div>
+
+            <h1 class="text-5xl font-extrabold text-white tracking-tight">
+                Payroll Management
+            </h1>
+
+            <p class="text-gray-400 mt-3 tracking-wide">
+                Manage payroll employee data with modern dashboard
+            </p>
+
+        </div>
 
         <!-- ERROR -->
         @if ($errors->any())
-        <div class="bg-red-100 p-3 rounded">
+        <div class="bg-red-500/15 border border-red-400/20 text-red-300 px-5 py-4 rounded-2xl mb-5 backdrop-blur-lg shadow-lg">
             @foreach ($errors->all() as $error)
-            <p class="text-red-500 text-sm">{{ $error }}</p>
+            <p class="text-sm">{{ $error }}</p>
             @endforeach
         </div>
         @endif
 
         <!-- SUCCESS -->
         @if (session('message'))
-        <div class="bg-green-100 p-3 rounded text-green-600 font-semibold">
+        <div class="bg-green-500/15 border border-green-400/20 text-green-300 px-5 py-4 rounded-2xl mb-5 backdrop-blur-lg shadow-lg font-semibold">
             {{ session('message') }}
         </div>
         @endif
 
+        <!-- FORM -->
         <div class="flex justify-center">
-            <div class="bg-white shadow-lg rounded-xl p-8 w-full max-w-md">
-                <form wire:submit.prevent="store" class="space-y-5">
+
+            <div class="bg-white/10 backdrop-blur-2xl border border-white/10 shadow-[0_20px_80px_rgba(0,0,0,0.45)] rounded-[32px] p-8 w-full max-w-2xl">
+
+                <h2 class="text-2xl font-bold text-white text-center mb-8 tracking-wide">
+                    ✨ Payroll Form
+                </h2>
+
+                <form wire:submit.prevent="store" class="space-y-6">
+
+                    <!-- EMPLOYEE -->
                     <div>
-                        <label class="block text-sm font-medium text-gray-600 mb-2">Employee</label>
-                        <select wire:model='employee_id' class="w-full border border-gray-300 rounded-lg px-3 py-2 
-                            focus:outline-none focus:ring-2 focus:ring-blue-400">
-                            <option value="">--- Pilih Employee ---</option>
+
+                        <label class="block text-sm font-medium text-gray-300 mb-2 tracking-wide">
+                            Employee
+                        </label>
+
+                        <select wire:model='employee_id'
+                            class="w-full bg-white/10 border border-white/10 rounded-2xl px-5 py-4 text-white shadow-lg focus:outline-none focus:ring-2 focus:ring-cyan-400 transition-all duration-300">
+
+                            <option value="" class="bg-[#111827]">
+                                --- Pilih Employee ---
+                            </option>
+
                             @foreach ( $employees as $item )
-                            <option value="{{ $item->id }}">
+
+                            <option value="{{ $item->id }}" class="bg-[#111827]">
                                 {{ $item->user->name }}
                             </option>
+
                             @endforeach
+
                         </select>
+
                     </div>
 
-                    <!-- NAME -->
+                    <!-- PERIOD -->
                     <div>
-                        <label class="block text-sm font-medium text-gray-600 mb-1">
+
+                        <label class="block text-sm font-medium text-gray-300 mb-2 tracking-wide">
                             Period
                         </label>
-                        <input type="date" wire:model="period" placeholder="Masukkan Period"
-                            class="w-full border border-gray-300 rounded-lg px-3 py-2 focus:ring-2 focus:ring-blue-400">
+
+                        <input type="date" wire:model="period"
+                            class="w-full bg-white/10 border border-white/10 rounded-2xl px-5 py-4 text-white shadow-lg focus:outline-none focus:ring-2 focus:ring-violet-400 transition-all duration-300">
+
                     </div>
 
-                    <!-- EMAIL -->
+                    <!-- ALLOWANCE -->
                     <div>
-                        <label class="block text-sm font-medium text-gray-600 mb-1">
-                            Allowence
+
+                        <label class="block text-sm font-medium text-gray-300 mb-2 tracking-wide">
+                            Allowance
                         </label>
-                        <input type="number" wire:model="allowance" placeholder="Masukkan Allowence"
-                            class="w-full border border-gray-300 rounded-lg px-3 py-2 focus:ring-2 focus:ring-blue-400">
+
+                        <input type="number" wire:model="allowance" placeholder="Masukkan Allowance"
+                            class="w-full bg-white/10 border border-white/10 rounded-2xl px-5 py-4 text-white placeholder-gray-400 shadow-lg focus:outline-none focus:ring-2 focus:ring-fuchsia-400 transition-all duration-300">
+
                     </div>
 
-                    <!-- PASSWORD -->
+                    <!-- DEDUCTION -->
                     <div>
-                        <label class="block text-sm font-medium text-gray-600 mb-1">
+
+                        <label class="block text-sm font-medium text-gray-300 mb-2 tracking-wide">
                             Deduction
                         </label>
+
                         <input type="number" wire:model="deduction" placeholder="Masukkan Deduction"
-                            class="w-full border border-gray-300 rounded-lg px-3 py-2 focus:ring-2 focus:ring-blue-400">
+                            class="w-full bg-white/10 border border-white/10 rounded-2xl px-5 py-4 text-white placeholder-gray-400 shadow-lg focus:outline-none focus:ring-2 focus:ring-red-400 transition-all duration-300">
+
                     </div>
 
                     <!-- BUTTON -->
                     @if ($editCheck == false)
-                    <button type="submit" class="w-full bg-blue-500 hover:bg-blue-600 text-white py-2 rounded-lg">
-                        Simpan
+
+                    <button type="submit"
+                        class="w-full bg-gradient-to-r from-cyan-400 via-violet-500 to-fuchsia-500 text-white py-4 rounded-2xl font-bold shadow-[0_10px_30px_rgba(139,92,246,0.45)] hover:scale-[1.02] hover:shadow-[0_15px_40px_rgba(6,182,212,0.45)] transition-all duration-300">
+
+                        🚀 Save Payroll
+
                     </button>
+
                     @else
+
                     <button type="button" wire:click="update({{ $idEdit }})"
-                        class="w-full bg-purple-500 hover:bg-purple-600 text-white py-2 rounded-lg">
-                        Update
+                        class="w-full bg-gradient-to-r from-fuchsia-500 via-violet-500 to-cyan-400 text-white py-4 rounded-2xl font-bold shadow-[0_10px_30px_rgba(139,92,246,0.45)] hover:scale-[1.02] hover:shadow-[0_15px_40px_rgba(6,182,212,0.45)] transition-all duration-300">
+
+                        ✨ Update Payroll
+
                     </button>
 
                     <button type="button" wire:click="clear"
-                        class="w-full bg-gray-500 hover:bg-gray-600 text-white py-2 rounded-lg mt-2">
+                        class="w-full bg-white/10 border border-white/10 text-gray-300 py-4 rounded-2xl mt-3 hover:bg-white/20 transition shadow-lg">
+
                         Clear
+
                     </button>
+
                     @endif
 
                 </form>
+
             </div>
+
         </div>
 
-        <div class="text-center mt-4">
-            <input type="text" wire:model.live="keyword" placeholder="Cari nama..." class="w-full md:w-1/3 border border-gray-300 rounded-lg px-4 py-2 
-            focus:outline-none focus:ring-2 focus:ring-blue-400 
-        shadow-sm">
+        <!-- SEARCH -->
+        <div class="text-center mt-8">
+
+            <input type="text" wire:model.live="keyword" placeholder="🔍 Cari nama..."
+                class="w-full md:w-1/3 bg-white/10 border border-white/10 rounded-2xl px-5 py-4 text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-cyan-400 shadow-lg backdrop-blur-xl transition-all duration-300">
+
         </div>
+
         <!-- TABLE -->
-        <div class="mt-5 px-6">
-            <div class="bg-white shadow-lg rounded-xl overflow-hidden">
-                <table class="min-w-full text-sm">
-                    <thead class="bg-gray-200 text-gray-700">
+        <div class="mt-8">
+
+            <div class="bg-white/10 backdrop-blur-2xl border border-white/10 shadow-[0_20px_80px_rgba(0,0,0,0.45)] rounded-[32px] overflow-hidden">
+
+                <table class="min-w-full text-sm text-gray-200">
+
+                    <thead class="bg-white/10 text-gray-300 uppercase tracking-widest text-xs">
+
                         <tr>
-                            <th class="px-4 py-2 text-left">#</th>
-                            <th class="px-4 py-2 text-left">Employeename</th>
-                            <th class="px-4 py-2 text-left">Period</th>
-                            <th class="px-4 py-2 text-left">Salary</th>
-                            <th class="px-4 py-2 text-left">Allowance</th>
-                            <th class="px-4 py-2 text-left">Deduction</th>
-                            <th class="px-4 py-2 text-left">Netsalary</th>
-                            <th class="px-4 py-2 text-left">Action</th>
+                            <th class="px-5 py-4 text-left">#</th>
+                            <th class="px-5 py-4 text-left">Employee</th>
+                            <th class="px-5 py-4 text-left">Period</th>
+                            <th class="px-5 py-4 text-left">Salary</th>
+                            <th class="px-5 py-4 text-left">Allowance</th>
+                            <th class="px-5 py-4 text-left">Deduction</th>
+                            <th class="px-5 py-4 text-left">Net Salary</th>
+                            <th class="px-5 py-4 text-left">Action</th>
                         </tr>
+
                     </thead>
 
-                    <tbody class="divide-y">
+                    <tbody class="divide-y divide-white/10">
+
                         @foreach ($payrolls as $item)
-                        <tr>
-                            <td class="px-4 py-2">{{ $loop->iteration }}</td>
-                            <td class="px-4 py-2">{{ $item->employee->user->name }}</td>
-                            <td class="px-4 py-2">{{ $item->period }}</td>
-                            <td class="px-4 py-2">{{ $item->employee->salary }}</td>
-                            <td class="px-4 py-2">{{ number_format($item->allowance) }}</td>
-                            <td class="px-4 py-2">{{  number_format($item->deduction) }}</td>
-                            <td class="px-4 py-2">{{ number_format($item->net_salary) }}</td>
-                            <td class="px-4 py-2 space-x-2">
+
+                        <tr class="hover:bg-white/5 transition duration-300">
+
+                            <td class="px-5 py-4 text-gray-300">
+                                {{ $loop->iteration }}
+                            </td>
+
+                            <td class="px-5 py-4 font-semibold text-white">
+                                {{ $item->employee->user->name }}
+                            </td>
+
+                            <td class="px-5 py-4 text-gray-300">
+                                {{ $item->period }}
+                            </td>
+
+                            <td class="px-5 py-4 text-cyan-300 font-bold">
+                                Rp {{ number_format($item->employee->salary) }}
+                            </td>
+
+                            <td class="px-5 py-4 text-green-300 font-semibold">
+                                Rp {{ number_format($item->allowance) }}
+                            </td>
+
+                            <td class="px-5 py-4 text-red-300 font-semibold">
+                                Rp {{ number_format($item->deduction) }}
+                            </td>
+
+                            <td class="px-5 py-4 text-fuchsia-300 font-bold">
+                                Rp {{ number_format($item->net_salary) }}
+                            </td>
+
+                            <td class="px-5 py-4 space-x-2">
 
                                 <button wire:click="destroy({{ $item->id }})"
-                                    class="bg-red-500 hover:bg-red-600 text-white px-3 py-1 rounded">
+                                    class="bg-red-500/15 border border-red-400/20 hover:bg-red-500 text-red-300 hover:text-white px-4 py-2 rounded-xl text-sm shadow-lg transition-all duration-300">
+
                                     Hapus
+
                                 </button>
 
                                 @if ($editCheck == false)
+
                                 <button wire:click="edit({{ $item->id }})"
-                                    class="bg-blue-500 hover:bg-blue-600 text-white px-4 py-1 rounded">
+                                    class="bg-cyan-500/15 border border-cyan-400/20 hover:bg-cyan-500 text-cyan-300 hover:text-white px-4 py-2 rounded-xl text-sm shadow-lg transition-all duration-300">
+
                                     Edit
+
                                 </button>
+
                                 @endif
 
                             </td>
+
                         </tr>
+
                         @endforeach
+
                     </tbody>
+
                 </table>
+
             </div>
+
         </div>
+
     </div>
+
 </div>
